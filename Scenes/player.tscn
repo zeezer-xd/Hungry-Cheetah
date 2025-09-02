@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://buf2wtcrdukhc"]
+[gd_scene load_steps=17 format=3 uid="uid://buf2wtcrdukhc"]
 
 [ext_resource type="Script" uid="uid://b0372jsk6le5l" path="res://Scripts/player_movement.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://q1ns0yydliv" path="res://Assets/DinoSprites - doux.png" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://7hr5deoovobx" path="res://Scenes/gun.gd" id="3_fkybt"]
+[ext_resource type="Texture2D" uid="uid://banflp8pfakik" path="res://Assets/Sprite-0001.png" id="3_vgqql"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("1_v0iea")
@@ -92,7 +94,6 @@ height = 18.0
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
-movement_speed = 100.0
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -103,3 +104,11 @@ frame_progress = 0.884848
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_3smsa")
+
+[node name="gun" type="Node2D" parent="."]
+script = ExtResource("3_fkybt")
+
+[node name="gun_sprite" type="Sprite2D" parent="gun"]
+unique_name_in_owner = true
+texture = ExtResource("3_vgqql")
+offset = Vector2(16, 0)
