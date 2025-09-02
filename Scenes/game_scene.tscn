@@ -6,7 +6,6 @@
 
 [node name="player" parent="." instance=ExtResource("1_x87qo")]
 motion_mode = 1
-movement_speed = 150.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)

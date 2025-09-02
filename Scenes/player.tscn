@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://buf2wtcrdukhc"]
 
-[ext_resource type="Script" uid="uid://c8n8xrnvo38xu" path="res://Scenes/player_movement.gd" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://b0372jsk6le5l" path="res://Scripts/player_movement.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://q1ns0yydliv" path="res://Assets/DinoSprites - doux.png" id="1_v0iea"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
@@ -92,6 +92,7 @@ height = 18.0
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
+movement_speed = 100.0
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
