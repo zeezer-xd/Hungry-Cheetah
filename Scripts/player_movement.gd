@@ -5,6 +5,12 @@ extends CharacterBody2D
 @export var dash_duration: float = 0.10
 @export var dash_cooldown: float = 1   # cooldown in seconds
 
+@export var max_hp: int = 100
+var current_hp: int
+
+var immune: bool = true   # start with immunity
+@export var immunity_time: float = 0.5   # how long (seconds) the player is immune after spawn
+
 var input_direction: Vector2 = Vector2.ZERO
 var is_dashing: bool = false
 var dash_timer: float = 0.0
@@ -12,8 +18,19 @@ var dash_direction: Vector2 = Vector2.ZERO   # store dash direction
 var base_speed: float
 var dash_cooldown_timer: float = 0.0   # tracks cooldown
 
+@onready var sprite: AnimatedSprite2D = $sprite   # make sure your sprite node is named "sprite"
+
 func _ready() -> void:
 	base_speed = walk_speed
+	current_hp = max_hp
+	print("Max HP at start: ", max_hp, " | Current HP at start: ", current_hp)
+
+	# Start immunity
+	immune = true
+	await get_tree().create_timer(immunity_time).timeout
+	immune = false
+	print("Immunity off")
+
 
 func _physics_process(delta: float) -> void:
 	# Update cooldown
@@ -39,21 +56,36 @@ func _physics_process(delta: float) -> void:
 		if dash_timer <= 0.0:
 			is_dashing = false
 	else:
-		# Instant walk movement
+		# Walk movement
 		velocity = input_direction * base_speed
 
-	# Flip sprite (make sure node is named "sprite" or update to your AnimatedSprite2D name)
+	# Flip sprite
 	if input_direction.x > 0:
-		%sprite.flip_h = false
+		sprite.flip_h = false
 	elif input_direction.x < 0:
-		%sprite.flip_h = true
+		sprite.flip_h = true
 
-	# Animation
-	if is_dashing:
-		%sprite.play("dash")
-	elif input_direction != Vector2.ZERO:
-		%sprite.play("walking")
+	# Animation (only idle/walk for now)
+	if input_direction != Vector2.ZERO:
+		sprite.play("walking")
 	else:
-		%sprite.play("idle")
+		sprite.play("idle")
 
 	move_and_slide()
+
+# Damage handling
+func take_damage(amount: int) -> void:
+	if immune:
+		print("Player immune, no damage taken")
+		return
+
+	current_hp -= amount
+	print("Player HP: ", current_hp)
+
+	if current_hp <= 0:
+		die()
+
+
+func die() -> void:
+	print("Player died!")
+	queue_free()   # remove player from scene

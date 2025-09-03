@@ -1,18 +1,22 @@
 extends Area2D
 
-@export var speed: float = 500.0
+@export var speed: float = 600
+@export var lifetime: float = 2.0
+@export var damage: int = 20   # set default damage
+
 var direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
-	# Delete the bullet after 2 seconds automatically
-	await get_tree().create_timer(2.0).timeout
-	if is_instance_valid(self):
-		queue_free()
+	$CollisionShape2D.disabled = false
+	await get_tree().create_timer(lifetime).timeout
+	queue_free()
 
 func _physics_process(delta: float) -> void:
-	# Move the bullet
 	position += direction * speed * delta
 
+# When bullet collides
 func _on_body_entered(body: Node) -> void:
-	# For now just remove the bullet when it hits anything
+	if body.is_in_group("player"):
+		body.take_damage(damage)   # <-- use exported damage
+	$CollisionShape2D.disabled = true
 	queue_free()

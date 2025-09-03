@@ -93,8 +93,9 @@ animations = [{
 radius = 5.0
 height = 18.0
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_cvnsp")
+immunity_time = 5.01
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
