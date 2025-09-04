@@ -11,6 +11,7 @@ var can_shoot: bool = true
 @export var mag_size: int = 12          # how many bullets before reload
 @export var reload_time: float = 3.0    # reload delay in seconds
 var bullets_left: int                   # how many bullets are currently in mag
+var right_click_was_pressed = false
 
 func _ready() -> void:
 	bullets_left = mag_size   # start with a full magazine
@@ -34,6 +35,14 @@ func _process(delta: float) -> void:
 		start_shooting()
 	elif not Input.is_action_pressed("shoot") and shooting:
 		shooting = false
+		
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		if not right_click_was_pressed:
+			right_click_was_pressed = true
+			reload()
+			print("Reloading...")
+	else:
+		right_click_was_pressed = false
 
 
 func start_shooting() -> void:

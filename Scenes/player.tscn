@@ -95,6 +95,7 @@ height = 18.0
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_cvnsp")
+walk_speed = 400.0
 immunity_time = 5.01
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
