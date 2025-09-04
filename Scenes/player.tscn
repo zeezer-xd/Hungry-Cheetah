@@ -113,8 +113,9 @@ bullet_scene = ExtResource("4_fkybt")
 
 [node name="gun_sprite" type="Sprite2D" parent="gun"]
 unique_name_in_owner = true
+position = Vector2(0, 2)
 texture = ExtResource("3_vgqql")
 offset = Vector2(16, 0)
 
 [node name="GunMuzzle" type="Node2D" parent="gun"]
-position = Vector2(24, -2)
+position = Vector2(24, 0)

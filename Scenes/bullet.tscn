@@ -8,17 +8,14 @@ radius = 479.657
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_oduel")
-speed = 50.0
-lifetime = 5.0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -3.55271e-15)
-scale = Vector2(0.0140823, 0.0140823)
-texture = ExtResource("1_xjght")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 3.14159
 scale = Vector2(0.00625447, 0.00625447)
 shape = SubResource("CircleShape2D_xjght")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(-0.00754042, -0.00754042)
+texture = ExtResource("1_xjght")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

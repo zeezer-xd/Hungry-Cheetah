@@ -55,15 +55,21 @@ func shoot() -> void:
 	var bullet = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet)
 
+	# Spawn bullet exactly at muzzle position
 	bullet.global_position = gun_muzzle.global_position
+	bullet.rota = gun_muzzle.global_rotation
 
-	var dir: Vector2 = (get_global_mouse_position() - gun_muzzle.global_position).normalized()
-	bullet.direction = dir
-	bullet.global_position += dir * 8.0
+	# Direction based on muzzle rotation (recommended)
+	var dir = Vector2.RIGHT.rotated(gun_muzzle.global_rotation)
+	bullet.dir = dir
 
-	bullets_left -= 1   # use one bullet
+	# Optional offset (adjust if needed)
+	# bullet.global_position += dir * 8.0
+
+	bullets_left -= 1
 	print("Fired! Bullets left: ", bullets_left)
-	
+
+
 func reload() -> void:
 	print("Reloading...")
 	can_shoot = false
