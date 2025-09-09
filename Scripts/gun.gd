@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 		if not right_click_was_pressed:
 			right_click_was_pressed = true
 			reload()
+			await get_tree().create_timer(fire_rate).timeout
 			print("Reloading...")
 	else:
 		right_click_was_pressed = false
@@ -53,7 +54,6 @@ func start_shooting() -> void:
 			if bullets_left > 0:
 				shoot()
 				can_shoot = false
-				await get_tree().create_timer(fire_rate).timeout
 				can_shoot = true
 			else:
 				await reload()

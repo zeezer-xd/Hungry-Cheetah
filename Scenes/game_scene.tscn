@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgoww86h85ocm"]
+[gd_scene load_steps=4 format=3 uid="uid://dgoww86h85ocm"]
 
 [ext_resource type="PackedScene" uid="uid://buf2wtcrdukhc" path="res://Scenes/player.tscn" id="1_x87qo"]
 [ext_resource type="PackedScene" uid="uid://drg6fk5fkwwyi" path="res://Scenes/bullet.tscn" id="2_b6fju"]
+
+[sub_resource type="TileSet" id="TileSet_b6fju"]
 
 [node name="game_scene" type="Node2D"]
 
@@ -12,3 +14,8 @@ motion_mode = 1
 zoom = Vector2(2, 2)
 
 [node name="Bullet" parent="." instance=ExtResource("2_b6fju")]
+position = Vector2(-27, 26)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_b6fju")
+format = 2
